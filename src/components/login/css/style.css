@@ -1,0 +1,199 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --v-high-emphasis-opacity: 0.87;
+  --v-theme-on-background: 46, 62, 92;
+}
+
+::placeholder {
+  opacity: 0.8;
+  font-size: 16px;
+}
+
+.color {
+  color: rgba(var(--v-theme-on-background), var(--v-high-emphasis-opacity));
+}
+
+html,
+body {
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: rgb(26, 89, 140);
+}
+
+.container1 {
+  display: flex;
+}
+
+.body-left {
+  height: 100vh;
+  width: 67.77777%;
+}
+
+.banner {
+  background: url('../img/login-banner.jpg') left center / cover no-repeat;
+  height: 100vh;
+}
+
+.logo-banner {
+  position: fixed;
+  top: 2%;
+  left: 2%;
+  padding: 1%;
+  display: flex;
+  align-items: center;
+}
+
+.logo-title {
+  margin-left: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: rgba(var(--v-theme-on-background), var(--v-high-emphasis-opacity));
+}
+
+.logo-img {
+  object-fit: contain;
+}
+
+.body-right {
+  height: 100vh;
+  width: 33.33333%;
+  display: flex;
+}
+
+.form-login {
+  margin: auto;
+  width: 88%;
+  height: 60%;
+}
+
+.title {
+  padding: 1.25rem 0;
+}
+
+.form-title {
+  font-size: 1.5rem;
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+  width: 100%;
+}
+
+.sub-title {
+  font-size: 0.875rem;
+  font-weight: 400;
+  letter-spacing: 0.0094rem;
+  width: 100%;
+  opacity: 0.5;
+}
+
+.username,
+.password {
+  margin: 0.8rem 0;
+  border-radius: 8px;
+  padding: 15px 16px;
+  height: 56px;
+  width: 100%;
+  letter-spacing: inherit;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  color: #515e6e;
+}
+
+.form-question-1 {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.checkbox-save {
+  display: flex;
+}
+
+.checkbox {
+  height: 18px;
+  width: 18px;
+}
+
+.checkbox:hover {
+  cursor: pointer;
+}
+
+.checkbox-name {
+  margin-left: 10px;
+  opacity: 0.8;
+}
+
+.forget-password {
+}
+
+.btn-login {
+  width: 100%;
+  height: 38px;
+  background-color: rgb(26, 89, 140);
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 8px;
+}
+
+.btn-login:hover {
+  background-color: rgb(23, 106, 174);
+  color: #fff;
+  cursor: pointer;
+}
+
+.form-question-2 {
+  width: 100%;
+  padding: 18px;
+  text-align: center;
+}
+
+.notice-register {
+  opacity: 0.8;
+}
+
+.register {
+  margin-left: 6px;
+}
+
+@media (max-width: 1280px) {
+  .body-left {
+    width: 67.77777%;
+  }
+  .body-right {
+    width: 33.33333%;
+  }
+}
+
+@media (max-width: 992px) {
+  .body-left {
+    width: 50%;
+  }
+  .body-right {
+    width: 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .body-left {
+    display: none;
+  }
+  .body-right {
+    width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+}
