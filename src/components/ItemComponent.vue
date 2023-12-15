@@ -15,7 +15,7 @@
   <div>
     <h5>demo vuex:</h5>
     <div>
-      <span>demo Getters: {{ name }}</span> <br>
+      <span>demo Getters: {{ name }}</span> <br />
       <button @click="setName('CPC 2')">Thay doi</button>
     </div>
   </div>
@@ -34,7 +34,7 @@ export default {
   // demo vuex Mutations
   methods: {
     ...mapMutations(['setName']),
-    ...mapActions([''])
+    ...mapActions(['']),
   },
 
   setup() {
@@ -60,6 +60,7 @@ export default {
     function handleCount() {
       count.value++;
     }
+
     async function fetchData() {
       const req = {
         DateStart: '2023-12-05T17:00:00.000Z',
@@ -74,10 +75,12 @@ export default {
       const data = await getData(req);
       console.log(data);
     }
+    fetchData();
+    
     watch(count, function (newValue) {
       if (newValue > 2) alert('ok');
     });
-    fetchData();
+
     let fullName = computed(() => userName.value + count.value);
     return {
       userName,

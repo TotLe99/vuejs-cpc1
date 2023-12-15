@@ -1,3 +1,6 @@
+
 export default {
-    nameVuex: 'CPC1'
-}
+  nameVuex: 'CPC1',
+  inforLogin: {},
+  
+};
