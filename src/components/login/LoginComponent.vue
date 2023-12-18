@@ -34,7 +34,7 @@
           />
 
           <input
-            type="text"
+            type="password"
             placeholder="Mật khẩu"
             class="password"
             v-model="password"
@@ -89,13 +89,13 @@ export default {
         'username': username.value,
         'password': password.value,
       };
-      const pushLogin = await login(UserInfo)
+      const pushLogin = await login(UserInfo);
+      store.commit('setInforLogin', pushLogin);
       console.log(pushLogin);
       
       if(pushLogin.RespCode !== 0) {
         alert("Tài khoản, mật khẩu sai");
       } else {
-        store.commit('setInforLogin', pushLogin)
         router.push('/home');
       }
     }

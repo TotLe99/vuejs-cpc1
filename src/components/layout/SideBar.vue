@@ -13,10 +13,10 @@
           <strong class="logo-title">QUẢN LÝ TÀI SẢN</strong>
         </div>
       </li>
-      <li class="sub-sidebar" @click="handlePushToTable1">
+      <li class="sub-sidebar" @click="handlePushToMaterialList">
         <div class="d-flex">
           <i class="ti-home me-1 icon-sidebar"></i>
-          <p class="title-sidebar">Table 1</p>
+          <p class="title-sidebar">Danh sách nhập kho</p>
         </div>
       </li>
       <li class="sub-sidebar" @click="handlePushToTable2">
@@ -32,8 +32,8 @@
 <script>
 export default {
   methods: {
-    handlePushToTable1() {
-      this.$router.push('/table1');
+    handlePushToMaterialList() {
+      this.$router.push('/home/table1');
     },
     handlePushToTable2() {
       this.$router.push('/table2');

@@ -1,20 +1,22 @@
-import App from './App.vue';
-import router from './router';
-import { createApp } from 'vue';
 import './assets/css/style.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.min.js';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 import './assets/fonts/themify-icons/themify-icons.css';
+import '@vuepic/vue-datepicker/dist/main.css'; 
+
+import App from './App.vue';
+import router from './router';
+import { createApp } from 'vue';
 import storeConfigs from './store';
-import DatePicker from '@mui/lab/DatePicker';
-import AdapterDateFns from '@mui/x-date-picker/AdapterDateFns';
-import LocalizationProvider from '@mui/x-date-picker/LocalizationProvider';
+import VueDatePicker from '@vuepic/vue-datepicker'; 
+// import Paginate from 'vuejs-paginate';
 
 const app = createApp(App);
 
 app.use(router);
 app.use(storeConfigs);
-app.use(DatePicker);
-app.use(AdapterDateFns);
-app.use(LocalizationProvider);
+app.component('VueDatePicker', VueDatePicker);
+// app.component('paginate', Paginate);
 app.mount('#app');

@@ -26,14 +26,32 @@
       </div>
       <div class="hello-user">
         <p>Xin chào</p>
-        <p class="user-name">Lê Văn Tốt !</p>
+        <p class="user-name">{{ fullNameComputed }} !</p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+import {ref, computed} from 'vue';
+
+export default {
+  setup() {
+    const inforLogin = JSON.parse(localStorage.getItem('inforLogin'));
+    const fullName = ref();
+    fullName.value = inforLogin.UserInfo.FullName;
+
+    const fullNameComputed = computed(() => {
+      return fullName.value;
+    })
+    
+    return {
+      inforLogin,
+      fullName,
+      fullNameComputed
+    }
+  }
+};
 </script>
 
 <style scoped>
