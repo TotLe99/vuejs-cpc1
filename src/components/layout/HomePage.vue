@@ -31,16 +31,15 @@ export default {
 }
 
 .middle {
-    height: 100vh;
+  height: 100vh;
 }
 
 .middle-sidebar {
-    height: 100%;
+  height: 100%;
 }
 
-
 .sidebar {
-    height: 100%;
+  height: 100%;
 }
 
 .middle-content {
@@ -48,13 +47,13 @@ export default {
   margin-top: 50px;
   width: 100vw;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-  padding: 20px;
+  /*padding: 20px;*/
   background-color: #eee;
   overflow: hidden;
-    overflow-y: scroll;
+  overflow-y: scroll;
 }
 
-.router-view{
-    background-color: #fff;
+.router-view {
+  background-color: #fff;
 }
 </style>

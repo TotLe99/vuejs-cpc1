@@ -19,12 +19,6 @@
           <p class="title-sidebar">Danh sách nhập kho</p>
         </div>
       </li>
-      <li class="sub-sidebar" @click="handlePushToTable2">
-        <div class="d-flex">
-          <i class="ti-home me-1 icon-sidebar"></i>
-          <p class="title-sidebar">Table 2</p>
-        </div>
-      </li>
     </ul>
   </div>
 </template>
@@ -33,10 +27,7 @@
 export default {
   methods: {
     handlePushToMaterialList() {
-      this.$router.push('/home/table1');
-    },
-    handlePushToTable2() {
-      this.$router.push('/table2');
+      this.$router.push('/qlts/lo-nhap');
     },
   },
 };

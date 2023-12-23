@@ -30,14 +30,14 @@
             type="text"
             placeholder="Tài khoản"
             class="username"
-            v-model="username"
+            v-model="account.username"
           />
 
           <input
             type="password"
             placeholder="Mật khẩu"
             class="password"
-            v-model="password"
+            v-model="account.password"
           />
 
           <div class="form-question-1">
@@ -49,7 +49,9 @@
               <a href="#" class="forget-password">Quên mật khẩu?</a>
             </div>
           </div>
-          <button type="submit" class="btn-login" @click="fetchLogin()">ĐĂNG NHẬP</button>
+          <button type="submit" class="btn-login" @click="fetchLogin()">
+            ĐĂNG NHẬP
+          </button>
           <div class="form-question-2">
             <span class="notice-register color">Bạn chưa có tài khoản?</span>
             <a href="#" class="register">Đăng ký</a>
@@ -58,10 +60,41 @@
       </div>
     </div>
   </div>
+
+  <!-- <el-form
+    ref="ruleFormRef"
+    :model="account"
+    status-icon
+    :rules="rules"
+    label-width="120px"
+    class="demo-ruleForm"
+  >
+    <el-form-item prop="username">
+      <el-input
+        v-model="account.username"
+        type="text"
+        placeholder="Tài khoản"
+        autocomplete="off"
+      />
+    </el-form-item>
+    <el-form-item prop="password">
+      <el-input
+        v-model="account.password"
+        type="password"
+        placeholder="Mật khẩu"
+        autocomplete="off"
+      />
+    </el-form-item>
+    <el-form-item>
+      <el-button type="primary" @click="submitForm(ruleFormRef)"
+        >ĐĂNG NHẬP</el-button
+      >
+    </el-form-item>
+  </el-form> -->
 </template>
 
 <script>
-import { ref } from 'vue';
+import { reactive } from 'vue';
 import { login } from '../../api/login';
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
@@ -81,28 +114,33 @@ export default {
   setup() {
     const router = useRouter();
     const store = useStore();
-    let username = ref('');
-    let password = ref('');
-    
+    const account = reactive({
+      username: '',
+      password: '',
+    });
+
     async function fetchLogin() {
       const UserInfo = {
-        'username': username.value,
-        'password': password.value,
+        username: account.username,
+        password: account.password,
       };
       const pushLogin = await login(UserInfo);
       store.commit('setInforLogin', pushLogin);
       console.log(pushLogin);
-      
-      if(pushLogin.RespCode !== 0) {
-        alert("Tài khoản, mật khẩu sai");
+
+      if (pushLogin.RespCode !== 0) {
+        alert('Tài khoản, mật khẩu sai');
       } else {
-        router.push('/home');
+        if (Object.keys(router.currentRoute.value.query).length > 0) {
+          router.push(router.currentRoute.value.query.redirect);
+        } else {
+          router.push('/qlts/lo-nhap');
+        }
       }
     }
 
     return {
-      username,
-      password,
+      account,
       fetchLogin,
     };
   },
