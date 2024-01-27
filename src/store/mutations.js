@@ -7,4 +7,8 @@ export default {
     state.inforLogin = infor;
     localStorage.setItem('inforLogin', JSON.stringify(state.inforLogin));
   },
+
+  setDataCheckStampVuex(state, data) {
+    state.dataCheckStampVuex = data;
+  },
 };

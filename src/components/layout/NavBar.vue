@@ -6,7 +6,7 @@
       </div>
       <div class="navbar-title d-flex justify-content-between">
         <span>
-          <p>QLTS</p>
+          <p>KPL</p>
         </span>
         <!-- <span>/</span> -->
         <span>

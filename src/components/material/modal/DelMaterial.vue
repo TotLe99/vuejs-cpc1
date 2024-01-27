@@ -35,6 +35,7 @@
 <script>
 import { ref } from 'vue';
 import useMaterialLst from '../../../api/materialList';
+
 export default {
   props: {
     getMaterialProps: {
@@ -57,6 +58,7 @@ export default {
     function closeModal() {
       hiddenButton.value = true;
       emit('closeModal', false);
+      emit('accept', true);
     }
 
     const hiddenButton = ref(props.hiddenButtonProps);

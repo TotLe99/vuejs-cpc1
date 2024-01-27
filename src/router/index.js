@@ -1,11 +1,16 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import MaterialList from '../components/table/MaterialList';
+import MaterialList from '../components/material/MaterialList';
+import TemList from '../components/tem/TemList';
 import LoginComponent from '../components/login/LoginComponent';
 import SideBar from '../components/layout/SideBar';
 import NavBar from '../components/layout/NavBar';
 import HomePage from '../components/layout/HomePage';
+import LocationMaterial from '../components/locationMaterial/LocationMaterial';
+import ExportList from '../components/retailExport/ExportList';
+import CreateVoucher from '../components/internalInventory/CreateVoucher';
+import InventoryInternalList from '../components/internalInventory/InventoryInternalList';
 
-// const inforLogin = JSON.parse(localStorage.getItem('inforLogin'));
+const isAutenticated = JSON.parse(localStorage.getItem('inforLogin'));
 
 const routes = [
   {
@@ -22,8 +27,8 @@ const routes = [
     redirect: '/login',
   },
   {
-    path: '/qlts',
-    name: 'qlts',
+    path: '/kpl',
+    name: 'kpl',
     component: HomePage,
     children: [
       {
@@ -38,6 +43,31 @@ const routes = [
         name: 'lo-nhap',
         component: MaterialList,
       },
+      {
+        path: 'tem',
+        name: 'tem',
+        component: TemList,
+      },
+      {
+        path: 'location',
+        name: 'location',
+        component: LocationMaterial,
+      },
+      {
+        path: 'retailExport',
+        name: 'retailExport',
+        component: ExportList,
+      },
+      {
+        path: 'createVoucher',
+        name: 'createVoucher',
+        component: CreateVoucher,
+      },
+      {
+        path: 'inventoryInternalList',
+        name: 'inventoryInternalList',
+        component: InventoryInternalList,
+      },
     ],
   },
 ];
@@ -48,8 +78,6 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const isAutenticated = JSON.parse(localStorage.getItem('inforLogin'));
-
   if (to.name !== 'login' && isAutenticated == null) {
     next({
       name: 'login',

@@ -11,10 +11,15 @@ import router from './router';
 import { createApp } from 'vue';
 import storeConfigs from './store';
 import ElementPlus from 'element-plus';
+import _ from 'lodash';
+import QRCodeVue3 from 'qrcode-vue3';
 
 const app = createApp(App);
 
 app.use(router);
 app.use(storeConfigs);
 app.use(ElementPlus);
+app.use(QRCodeVue3);
+app.config.globalProperties._ = _;
+
 app.mount('#app');

@@ -474,7 +474,12 @@ export default {
 
 .el-input__inner::placeholder,
 .el-textarea__inner::placeholder {
-  font-size: 12px;
+  font-size: 0.8571rem;
+}
+
+.el-input__inner,
+.el-textarea__inner {
+  height: 3.5em;
 }
 
 .mb-18px--mw-100 {

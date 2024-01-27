@@ -26,32 +26,47 @@
             <p class="sub-title">{{ subTitle }}</p>
           </div>
 
-          <input
-            type="text"
-            placeholder="Tài khoản"
-            class="username"
-            v-model="account.username"
-          />
+          <el-form
+            ref="ruleFormRef"
+            :model="account"
+            status-icon
+            :rules="rules"
+            class="demo-ruleForm w-100"
+            @keyup.enter="submitForm(ruleFormRef)"
+          >
+            <el-form-item prop="username">
+              <el-input
+                placeholder="Tài khoản"
+                v-model="account.username"
+                autocomplete="off"
+              />
+            </el-form-item>
+            <el-form-item prop="password">
+              <el-input
+                placeholder="Mật khẩu"
+                v-model="account.password"
+                autocomplete="off"
+              />
+            </el-form-item>
 
-          <input
-            type="password"
-            placeholder="Mật khẩu"
-            class="password"
-            v-model="account.password"
-          />
-
-          <div class="form-question-1">
-            <div class="checkbox-save">
-              <input type="checkbox" name="checkbox" class="checkbox" />
-              <label class="checkbox-name color">Lưu đăng nhập</label>
+            <div class="form-question-1">
+              <div class="checkbox-save">
+                <input type="checkbox" name="checkbox" class="checkbox" />
+                <label class="checkbox-name color">Lưu đăng nhập</label>
+              </div>
+              <div>
+                <a href="#" class="forget-password">Quên mật khẩu?</a>
+              </div>
             </div>
-            <div>
-              <a href="#" class="forget-password">Quên mật khẩu?</a>
-            </div>
-          </div>
-          <button type="submit" class="btn-login" @click="fetchLogin()">
-            ĐĂNG NHẬP
-          </button>
+            <el-form-item>
+              <el-button
+                class="btn-login w-100"
+                type="primary"
+                @click="submitForm(ruleFormRef)"
+                >ĐĂNG NHẬP</el-button
+              >
+            </el-form-item>
+          </el-form>
           <div class="form-question-2">
             <span class="notice-register color">Bạn chưa có tài khoản?</span>
             <a href="#" class="register">Đăng ký</a>
@@ -60,41 +75,10 @@
       </div>
     </div>
   </div>
-
-  <!-- <el-form
-    ref="ruleFormRef"
-    :model="account"
-    status-icon
-    :rules="rules"
-    label-width="120px"
-    class="demo-ruleForm"
-  >
-    <el-form-item prop="username">
-      <el-input
-        v-model="account.username"
-        type="text"
-        placeholder="Tài khoản"
-        autocomplete="off"
-      />
-    </el-form-item>
-    <el-form-item prop="password">
-      <el-input
-        v-model="account.password"
-        type="password"
-        placeholder="Mật khẩu"
-        autocomplete="off"
-      />
-    </el-form-item>
-    <el-form-item>
-      <el-button type="primary" @click="submitForm(ruleFormRef)"
-        >ĐĂNG NHẬP</el-button
-      >
-    </el-form-item>
-  </el-form> -->
 </template>
 
 <script>
-import { reactive } from 'vue';
+import { reactive, ref } from 'vue';
 import { login } from '../../api/login';
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
@@ -112,12 +96,48 @@ export default {
   },
 
   setup() {
-    const router = useRouter();
-    const store = useStore();
     const account = reactive({
       username: '',
       password: '',
     });
+
+    const ruleFormRef = ref(null);
+
+    const validateUserName = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('Vui lòng nhập tên đăng nhập'));
+      } else {
+        callback();
+      }
+    };
+    const validatePassword = (rule, value, callback) => {
+      console.log(value);
+      if (value === '') {
+        callback(new Error('Vui lòng nhập mật khẩu'));
+      } else {
+        callback();
+      }
+    };
+
+    const rules = {
+      username: [{ validator: validateUserName, trigger: 'blur' }],
+      password: [{ validator: validatePassword, trigger: 'blur' }],
+    };
+
+    const submitForm = () => {
+      ruleFormRef.value.validate((valid) => {
+        if (valid) {
+          fetchLogin();
+          console.log('Submit!');
+        } else {
+          console.log('Error submit!');
+        }
+      });
+    };
+
+    //
+    const router = useRouter();
+    const store = useStore();
 
     async function fetchLogin() {
       const UserInfo = {
@@ -134,7 +154,7 @@ export default {
         if (Object.keys(router.currentRoute.value.query).length > 0) {
           router.push(router.currentRoute.value.query.redirect);
         } else {
-          router.push('/qlts/lo-nhap');
+          router.push('/kpl/lo-nhap');
         }
       }
     }
@@ -142,11 +162,24 @@ export default {
     return {
       account,
       fetchLogin,
+      ruleFormRef,
+      rules,
+      submitForm,
     };
   },
 };
 </script>
 
-<style scoped>
+<style>
 @import './css/style.css';
+
+.el-input__inner {
+  font-size: 12px;
+  padding: 15px 0;
+  height: 4.6em;
+}
+
+.el-input__wrapper {
+  border-radius: 8px;
+}
 </style>

@@ -1,8 +1,14 @@
 import axios from 'axios';
 import { ref } from 'vue';
+import { ElNotification } from 'element-plus';
 
 export default function usseMaterialLst() {
   let dataMaterialLst = ref([]);
+
+  // phan trang
+  const currentPage = ref(1);
+  const pageSize = ref(10);
+  const pageSizes = ref([10, 20, 30, 50, 100]);
 
   async function getMaterialLst(data) {
     const res = await axios({
@@ -11,9 +17,7 @@ export default function usseMaterialLst() {
       data: data,
     });
     dataMaterialLst.value = await res.data.Data;
-  }
 
-  function paginateMaterialLst(currentPage, pageSize) {
     const startIndex = (currentPage.value - 1) * pageSize.value;
     const endIndex = Math.min(
       startIndex + pageSize.value,
@@ -29,9 +33,17 @@ export default function usseMaterialLst() {
       data: req,
     });
     if (res.data.RespCode === 0) {
-      alert('Thêm lô thành công');
+      ElNotification({
+        title: 'Thành công',
+        message: 'Thêm lô thành công',
+        type: 'success',
+      });
     } else {
-      alert(res.data.RespText);
+      ElNotification({
+        title: 'Thất bại',
+        message: res.data.RespText,
+        type: 'warning',
+      });
     }
     return res.data;
   }
@@ -43,9 +55,17 @@ export default function usseMaterialLst() {
       data: req,
     });
     if (res.data.RespCode === 0) {
-      alert('Cập nhật thành công');
+      ElNotification({
+        title: 'Thành công',
+        message: 'Cập nhật thành công',
+        type: 'success',
+      });
     } else {
-      alert(res.data.RespText);
+      ElNotification({
+        title: 'Thất bại',
+        message: res.data.RespText,
+        type: 'warning',
+      });
     }
     return res.data;
   }
@@ -57,19 +77,29 @@ export default function usseMaterialLst() {
       data: req,
     });
     if (res.data.RespCode === 0) {
-      alert('Xóa lô thành công');
+      ElNotification({
+        title: 'Thành công',
+        message: 'Xóa lô thành công',
+        type: 'success',
+      });
     } else {
-      alert(res.data.RespText);
+      ElNotification({
+        title: 'Thất bại',
+        message: res.data.RespText,
+        type: 'warning',
+      });
     }
     return res.data;
   }
 
   return {
     getMaterialLst,
-    paginateMaterialLst,
     dataMaterialLst,
     createMaterial,
     updateMaterial,
     deleteMaterial,
+    currentPage,
+    pageSize,
+    pageSizes,
   };
 }
